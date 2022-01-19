@@ -2,16 +2,16 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
+//Test
 public class FileOperations extends File { // Klasse FileOperations erbt von File.
 	// Klassenattribute die alle Objekte vom Typ FileOperations haben
 
 	String name; // Speichert den Namen des Files
 	// String type; // Speichert den Typ des Files.
 	String absolutePath; // Speichert den Pfad des Files
-	double speicherplatz; // Speichert die Größe des Files in KB
+	double speicherplatz; // Speichert die GrÃ¶ÃŸe des Files in KB
 
-	public FileOperations(String path) { // Konstruktor für die Klase
+	public FileOperations(String path) { // Konstruktor fÃ¼r die Klase
 		super(path); // This constructor creates a new File instance by converting the given pathname
 						// string into an abstract pathname. // FileOperations
 		this.name = this.getName();
