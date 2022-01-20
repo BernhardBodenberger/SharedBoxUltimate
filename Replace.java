@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.io.*;
 
-//Test
 public class Replace extends File {
 	String name;
 	String absolutePath; 
@@ -17,11 +16,15 @@ public class Replace extends File {
 		this.speicherplatz = this.length();
 	}
 
-	public void moveFile(String fileDestination) {
+	public Replace fileCopy() {
+		Replace originalFile = this; //
+		return (originalFile);
+	}
+
+	public void filePaste(String pathToCopy) {
+		Replace newFile = new Replace(pathToCopy);
 		try {
-			Files.move(this.toPath(), new Replace(fileDestination).toPath(),
-					StandardCopyOption.REPLACE_EXISTING);
-			System.out.println("File move successful");
+			Files.copy(this.toPath(), newFile.toPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,7 +34,8 @@ public class Replace extends File {
 
 		Replace file1 = new Replace("C:\\MPC_WP.JPG"); 
 
-		file1.moveFile("C:\\FMP\\" + file1.name);
+		Replace copy = file1.fileCopy();
+		copy.filePaste("C:\\FMP\\" + copy.name);
 		File file2 = new File("C:\\FMP\\12.txt");
 		file2.delete();
 	}
