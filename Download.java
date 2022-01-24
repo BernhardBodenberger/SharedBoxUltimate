@@ -8,7 +8,9 @@ import java.nio.channels.ReadableByteChannel;
 
 public class Download {
 
-	
+	public Download()
+	{
+	}
 	/*public static void main(String[] args) throws IOException 
 	{
 		Download download1 = new Download();
