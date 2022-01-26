@@ -1,0 +1,4 @@
+Vorname/Nachname/Email/Passwort/Adresse/Abteilung
+Muster/Alex/alex.muster@firma.de/1234/blank/Recherche
+Beispiel/Kim/kbeispiel@firma.de/1111/blank/-
+Noel/Sam/noel_sam@firma.de/kekse/blank/Recherche
