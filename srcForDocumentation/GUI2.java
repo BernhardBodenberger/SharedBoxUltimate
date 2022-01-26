@@ -6,10 +6,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Diese Klasse beinhaltet das Haupt-Interface f�r das Projekt SharedBox Ulitimate.
+ * Diese Klasse beinhaltet das Haupt-Interface für das Projekt SharedBox Ulitimate.
  * Mit diesem Interface kann sich der User in der Verzeichnisstruktur bewegen und
- * mit Hilfe eines Popupmenus die verschiedenen Operationene f�r Verzeichnisse oder Dateien ausf�hren.
- * Au�erdem kann mit dem Interface die Bearbeitung der User-Informationen aufgerufen werden,
+ * mit Hilfe eines Popupmenus die verschiedenen Operationene für Verzeichnisse oder Dateien ausführen.
+ * Außerdem kann mit dem Interface die Bearbeitung der User-Informationen aufgerufen werden,
  * um die Informationen des eingelogten Users zu bearbeiten. 
  * Eine Option damit der User sich wieder auslogen kann ist auch integriert.  
  * 
@@ -21,7 +21,7 @@ import java.awt.event.*;
 
 public class GUI2 extends JFrame implements ActionListener {
 	
-	/*Zuerst werden einige Variablen festgelgt, welche f�r die Funktion des
+	/*Zuerst werden einige Variablen festgelgt, welche für die Funktion des
 	 * Interfaces essenziell sind
 	 */
 	
@@ -30,7 +30,7 @@ public class GUI2 extends JFrame implements ActionListener {
 	FileDirectory Mover;
 	static FileDirectory file;
 	
-	//Dieses Objekt dient als Ablage f�r die Operationen 'copy', 'cut' und 'paste'
+	//Dieses Objekt dient als Ablage für die Operationen 'copy', 'cut' und 'paste'
 	FileDirectory AblageGUI;
 	
 	//Der String 'User' dient um den eingelogten User zu identifizierne
@@ -41,14 +41,14 @@ public class GUI2 extends JFrame implements ActionListener {
 	JScrollPane scroller = new JScrollPane(panel);
 	JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 	
-	//Diese Kn�pfe werde hinzugef�gt um alles Funktionen des Interfaces abzudecken
+	//Diese Knöpfe werde hinzugefügt um alles Funktionen des Interfaces abzudecken
 	JButton back = new JButton("back");
 	JButton editUser;
 	JButton createDirectory;
 	JButton refresh;
 	JButton logout;
 	
-	//hier werden die Ben�tigten Men�-Objekte erzeugt 
+	//hier werden die Benötigten Menü-Objekte erzeugt 
 	final JPopupMenu popupmenu;
 	JMenuItem cut;
 	JMenuItem copy;
@@ -144,9 +144,10 @@ public class GUI2 extends JFrame implements ActionListener {
 		
 		back.addActionListener(this);
 		
-		//Popup Constructor
+		// Initialisiert ein Popup Menü
 		popupmenu = new JPopupMenu("Edit");
 		
+		// Initialisiert alle Komponenten für das Popup Menü
 		cut = new JMenuItem("Cut");
 		copy = new JMenuItem("Copy");
 		paste = new JMenuItem("Paste");
@@ -159,7 +160,8 @@ public class GUI2 extends JFrame implements ActionListener {
 		download = new JMenuItem("Download");
 		open = new JMenuItem("Open");
 		invite = new JMenuItem("Invite");
-
+		
+		//Fügt Komponenten zum Popup-Menü hinzu
 		popupmenu.add(open);
 		popupmenu.add(cut);
 		popupmenu.add(copy);
@@ -174,7 +176,7 @@ public class GUI2 extends JFrame implements ActionListener {
 		popupmenu.add(invite);
 		
 		
-		//Popup action listeners
+		//Fügt Action Listener zu allen Menü-Operationen hinzu
 		cut.addActionListener(this);
 		copy.addActionListener(this);
 		paste.addActionListener(this);
@@ -255,7 +257,7 @@ public class GUI2 extends JFrame implements ActionListener {
 		 
 	}
 	public void actionPerformed(ActionEvent ev) {
-		
+		// Falls editUser Knopf gedrückt wird, öffne einen neuen Frame vom Typ readFile
 		if (ev.getSource() == editUser) {
 			readFile gui = new readFile();
 	    	try {
@@ -265,76 +267,77 @@ public class GUI2 extends JFrame implements ActionListener {
 	    		e.printStackTrace();
 	    		}
 		}
-		
+		// Falls createDirectory Knopf gedrückt wird, erstelle ein neues Verzeichnis
 		if (ev.getSource() == createDirectory) {
 			new File(CurrendWindow.toString() + "/Neues Verzeichnis").mkdirs();
 			this.refreshScroller();
 		}
-		
+		// Falls refresh Knopf gedrückt wird, rufe die refreshScroller Methode auf 
 		if (ev.getSource() == refresh) {
 			this.refreshScroller();
 		}
+		// Falls logout Knopf gedrückt wird, schließe aktuelles Fenster und öffne neues Fenster vom Typ UserLogin
 		if (ev.getSource() == logout) {
 			UserLogin login = new UserLogin();
 			login.los();
 			this.dispose();
 		}
-		
+		// Falls open Menüoption ausgewählt wird .. 
 		if (ev.getSource() == open) {
-			
+			//Falls dies ein Verzeichnis ist
 			if(Mover.isDirectory()) {
 				
-				
+				// Setze Current Window auf Mover = gehe in das Verzeichnis Mover
 				CurrendWindow = Mover;
 				this.refreshScroller();
 			}
+			// Falls dies eine Datei ist ...
 			if(Mover.isFile()) {
+				// Öffne diese Datei ?!
 				try {
 					Desktop.getDesktop().open(Mover);
 				}catch (Exception e) {}
 			}
 		}
-		
+		// Falls delete Menüoption aufgerufen wurde, lösche die Datei/Verzeichnis auf welches die Methode aufgerufen wurde.
 		if (ev.getSource() == delete) {
 			System.out.println("file deleted!");
 			file.deleteDirectory();
 			this.refreshScroller();
 		}
-		// DONE
+		// Falls cut Menüoption aufgerufen wurde, schneide die Datei/Verzeichnis auf welches die Methode aufgerufen wurde aus.
 		if (ev.getSource() == cut) {
 			System.out.println("file was cut!");
 			FileDirectory copy = file.cutOut();
 			AblageGUI = new FileDirectory(copy.absolutePath);
 			this.refreshScroller();
 		}
-		// DONE
+		// Falls copy Menüoption aufgerufen wurde, kopuere die Datei/Verzeichnis auf welches die Methode aufgerufen wurde.
 		if (ev.getSource() == copy) {
 			FileDirectory copy = file.copy();
 			AblageGUI = new FileDirectory(copy.absolutePath);
 			System.out.println(AblageGUI.toString());
 		}
-		// TODO
+		// Falls paste Menüoption aufgerufen wurde, füge die Datei/Verzeichnis in das Verzeichnis ein, auf welches die Methode aufgerufen wurde.
 		if (ev.getSource() == paste) {
 			file.paste(AblageGUI, file.toString());
 			this.refreshScroller();
 		}
-		// DONE
+		// Falls rename Menüoption aufgerufen wurde, öffne ein neues Fenster zum eingeben des neuen Namens.
 		if (ev.getSource() == rename) {
 			new OpenWindow(true, false, false, false, false);
 			this.refreshScroller();
 
 		}
-		// DONE
+		// Falls replace Menüoption aufgerufen wurde, öffne ein neues Fenster zum eingeben des Pfades der Datei mit welcher diese Datei ersetzt werden soll.
 		if (ev.getSource() == replace) {
 			new OpenWindow(false, false, true, false, false);
 			this.refreshScroller();
 		}
-		// DONE
+		// Falls showProperties Menüoption aufgerufen wurde, öffne ein neues Fenster welches die Eigenschaften dieser Datei anzeigt.
 		if (ev.getSource() == showProperties) {
 			String s = file.showProperties();
-			new ShowProperties(s);
-
-			
+			new ShowProperties(s);	
 		}
 		// DONE
 		if (ev.getSource() == upload) {
@@ -361,12 +364,12 @@ public class GUI2 extends JFrame implements ActionListener {
 			System.out.println("User invited");
 
 		}
-		// DONE
+		// Falls move Menüoption aufgerufen wurde, öffne ein neues Fenster um Pfad zum verschieben anzugeben.
 		if (ev.getSource() == move) {
 			System.out.println(file.toString());
 			new OpenWindow(false, true, false, false, false);
 		}
-		
+		// Falls back Knopf gedrückt wurde, setze den Mover auf das Elternverzeichnis
 		if (ev.getSource() == back) {
 			Mover = new FileDirectory(CurrendWindow.getParent());
 			CurrendWindow = Mover;
@@ -374,6 +377,7 @@ public class GUI2 extends JFrame implements ActionListener {
 			
 			this.refreshScroller();
 		}
+		
 		if (ev.getSource().getClass() == JButton.class && ev.getSource() != back && ev.getSource() != editUser && ev.getSource() != refresh && ev.getSource() != logout && ev.getSource() != createDirectory ) {
 			JButton test = new JButton();
 			test = (JButton) ev.getSource();
