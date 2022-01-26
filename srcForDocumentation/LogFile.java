@@ -5,12 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
-/** @author SE1 Projektgruppe 7
- *  @version 1.0
- * 
- * 
- * 
- * */
+/**
+* @author SE1 Projektgruppe 7
+* @version 1.0
+*/
 public class LogFile {
 	
 
