@@ -119,25 +119,35 @@ public class FileDirectory extends File {
 			e.printStackTrace();
 		}
 	}
-
+	/**	Dieser Funktion dient dem Download einer Datei aus SharedBoxUltimate in eines unserer 
+		lokalen Verzeichnisser herunterzuladen
+		@param source repräsentiert den Pfad der Datei die heruntergeladen werden soll
+		
+	*/
+	
 	public void download(String source) throws IOException 
 	{		
-			File sourceFile = new File(source);
-			JFileChooser dirChooser = new JFileChooser();
-			int choiceDir = dirChooser.showSaveDialog(null);
+		File sourceFile = new File(source);			// Aus dem Pfad der Datei als String generieren wir ein File
+		JFileChooser dirChooser = new JFileChooser();		// Konstruieren einen neues Objekt(dirChooser) der Klasse JFileChooser
+		int choiceDir = dirChooser.showSaveDialog(null);	/* Ein Dialog zum suchen des lokalen Speicherorts und zum Eingeben 
+										des Namens dem man der DAtei geben will Der entsprechende Dateisuffix 
+										muss ebenfall mit angegeben werden */ 
 			
-			if(choiceDir == JFileChooser.APPROVE_OPTION) 
-			{
-				File dDir = dirChooser.getSelectedFile();				
-				System.out.println(dDir);
-				URL fetchWebsite = sourceFile.toURI().toURL();
-				ReadableByteChannel readableByteChannel = Channels.newChannel(fetchWebsite.openStream());
-	        
-	        try (FileOutputStream fos = new FileOutputStream(dDir)) 
-	        { 
-	            fos.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
-	        }
+		if(choiceDir == JFileChooser.APPROVE_OPTION) 		/* Prüft das der geöffnete Dialog richtig geschlossen 
+									wird durch das Betätigen des Save Buttons */ 
+		{
+			File dDir = dirChooser.getSelectedFile();	/* Generiert ein File aus dem übergebenen File des SaveDialog und 
+									in diesem Fall von einem Verzeichnis in das man die Datei speicher möchte */			
+			System.out.println(dDir);			// Könnte entfernt werden
+			URL fetchWebsite = sourceFile.toURI().toURL();	// Es wir ein neues Objekt URL erzeugt aus dem Pfad des sourceFile indem man sie umwandelt
+			ReadableByteChannel readableByteChannel = Channels.newChannel(fetchWebsite.openStream());
+									/** Öffnet einen neuen ReadableByteChannel zur Datenübertragung der Download-Datei */
+
+			try (FileOutputStream fos = new FileOutputStream(dDir)) 
+			{ 
+			    fos.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
 			}
+		}
 	}
 	
 	
