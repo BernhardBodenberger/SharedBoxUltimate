@@ -11,19 +11,30 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.net.URL;
 
+/**
+ * Klasse, welche Objekte vom Typ Datei oder Verzeichnis modelliert. 
+ * In dieser Klasse befinden sich alle Methoden, die auf Dateien und Verzeichnisse ausgeführt werden können.
+ * @author SE1 Projektgruppe 7
+ *
+ */
+
 public class FileDirectory extends File {
 	String name; // Speichert den Namen des Files
-	// String type; // Speichert den Typ des Files.
 	String absolutePath; // Speichert den Pfad des Files
-	double speicherplatz; // Speichert die Gr��e des Files in KB
-
+	double speicherplatz; // Speichert die Größe des Files in KB
+	
+	// Konstruktor für die Klasse File Directory. String path wird an die Superklasse File weitergegeben
 	public FileDirectory(String path) {
 		super(path);
 		this.name = this.getName();
 		this.absolutePath = this.getAbsolutePath();
 		this.speicherplatz = this.length(); //
 	}
-
+	/**
+	 * Verschiebt eine Datei/Verzeichnis zu einem angegebenen Pfad. Der Pfad sollte wie folgt angegeben werden: C:/Users/Dell/Desktop/test.pdf
+	 * Am Ende des Pfades muss der neue name der Datei/Verzeichnis angegeben werden (hier test.pdf).
+	 * @param fileDestination = Pfad wohin die Datei/Verzeichnis hin verschoben wird
+	 */
 	public void move(String fileDestination) {
 		try {
 			Files.move(this.toPath(), new FileDirectory(fileDestination).toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -32,13 +43,19 @@ public class FileDirectory extends File {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Kopiert die Datei/Verzeichnis auf welches diese Methode ausgeführt wird
+	 * @return = gibt Datei/Verzeichnis zurück
+	 */
 	public FileDirectory copy() {
 		FileDirectory originalFile = this; //
 		return (originalFile);
 	}
-
-	// Pfad existiert, ablage in current file rein tun.
+	/**
+	 * Fügt eine Datei/Verzeichnis ins momentane Verzeichnis ein
+	 * @param ablage     = Die Datei/Verzeichnis welches momentan in der Ablage gespeichert ist
+	 * @param currentDir = der Pfad zum momentanen Verzeichnis
+	 */
 	public void paste(FileDirectory ablage, String currentDir) {
 		try {
 			Files.copy(ablage.toPath(), Paths.get(currentDir + "/" + ablage.name));
@@ -46,7 +63,10 @@ public class FileDirectory extends File {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Benennt ein Verzeichnis/Datei um. Der neue name muss mit der richtigen Endung angegeben werden (z.B. test.pdf)
+	 * @param newName = der neue Name der Datei/Verzeichnis
+	 */
 	public void rename(String newName) {
 		try {
 			Path source = Paths.get(this.absolutePath);
@@ -57,13 +77,21 @@ public class FileDirectory extends File {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Schneided eine Datei/Verzeichnis aus. D.h., dass die Datei/Verzeichnis auf welches diese Methode ausgeführt wird gelöscht wird
+	 * und dann zurückgegeben wird.
+	 * @return = gibt ausgeschnitte Datei/Verzeichnis zurück
+	 */
 	public FileDirectory cutOut() {
 		FileDirectory copy = this;
 		this.deleteDirectory();
 		return (copy);
 	}
-
+	/**
+	 * Zeigt die Eigenschaften einer Datei/Verzeichnis an. Hierzu gehören: Name des Files, Erstellungsdatum, ob die Datei ein Verzeichnis,
+	 * eine Datei oder etwas anderes ist.
+	 * @return = String mit den Eigenschaften der Datei/Verzeichnis
+	 */
 	public String showProperties() {
 		String newLine = System.getProperty("line.separator");
 		try {
@@ -80,7 +108,9 @@ public class FileDirectory extends File {
 		}
 		return ("");
 	}
-
+	/**
+	 * Löscht die Datei/Verzeichnis auf welches diese Methode ausgeführt wird.
+	 */
 	public void deleteDirectory() {
 		try {
 			Path path = Paths.get(this.absolutePath);
@@ -147,16 +177,22 @@ public class FileDirectory extends File {
 			e.printStackTrace();
 		}
 	}*/
-
+	
+	/**
+	 * Ersetzt die Datei/Verzeichnis auf welches diese Methode ausgeführt wird durch
+	 * eine angegebene Datei/Verzeichnis. Der Pfad zur Datei die ersetzt werden soll sollte wie folgt angegeben werden:
+	 * z.B. C:/Users/Dell/Desktop/test.pdf
+	 * @param pathToFile = Gibt den Pfad zur Datei/Verzeichnis an durch welches die
+	 * Datei/Verzeichnis ersetzt werden soll
+	 */
 	public void replace(String pathToFile) { // takes the file we want to replace this file with
 		FileDirectory originalFile = new FileDirectory(pathToFile);
 		String name = originalFile.getName();
 		String directory = this.getParent().toString();
 		String newPath = (directory + "\\" + name);
 		FileDirectory newFile = new FileDirectory(newPath);
-		System.out.println(newFile.absolutePath);
 		try {
-			Files.copy(originalFile.toPath(), newFile.toPath());
+			Files.copy(originalFile.toPath(), newFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
