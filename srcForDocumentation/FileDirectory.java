@@ -123,7 +123,8 @@ public class FileDirectory extends File {
 	
 	/**	Dieser Funktion dient dem Download einer Datei aus SharedBoxUltimate in eines unserer 
 		lokalen Verzeichnisser herunterzuladen
-		@param source repräsentiert den Pfad der Datei die heruntergeladen werden soll */
+		@param source repräsentiert den Pfad der Datei die heruntergeladen werden soll 
+		*/
 	public void download(String source) throws IOException 
 	{		
 		File sourceFile = new File(source);			// Aus dem Pfad der Datei als String generieren wir ein File
@@ -144,7 +145,7 @@ public class FileDirectory extends File {
 
 			try (FileOutputStream fos = new FileOutputStream(dDir)) 
 			{ 
-			    fos.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+			    fos.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE); // Datenübertragung des ausgewählten File(Download)
 			}
 		}
 	}
@@ -154,16 +155,18 @@ public class FileDirectory extends File {
 	*/
 	public void upload(String destinationString) throws IOException 
 	{  
-		JFileChooser fileChooser = new JFileChooser();
-		int choice = fileChooser.showOpenDialog(null);
+		JFileChooser fileChooser = new JFileChooser();		// Neues Objekt fileChooser der Klasser JFileChooser
+		int choice = fileChooser.showOpenDialog(null);		// Öffnet einen SaveDialog zum Auswählen der lokalen Datei die geuploaded werden soll
 		if(choice == JFileChooser.APPROVE_OPTION) {
-			File uploadFile = new File(fileChooser.getSelectedFile(), "");
-			URL sourceUrl = uploadFile.toURI().toURL();
-			System.out.println(sourceUrl);
-			ReadableByteChannel readByteChannel = Channels.newChannel(sourceUrl.openStream());
-        try (FileOutputStream fos = new FileOutputStream(destinationString)) 
+			File uploadFile = new File(fileChooser.getSelectedFile(), "");  /* Wenn alles ordnungsgemäß ausgewählt, 
+											  wurde wird das ausgewählte File an uploadFile übergeben*/
+			URL sourceUrl = uploadFile.toURI().toURL();			// uploadFile wird in einer URL umgewandelt
+			System.out.println(sourceUrl);					// Testausgabe
+			ReadableByteChannel readByteChannel = Channels.newChannel(sourceUrl.openStream()); /* Öffnet den Channel zur Datenübertragung 
+														von der Datei die geuploadet werden soll*/
+        try (FileOutputStream fos = new FileOutputStream(destinationString)) // neuer FileOutput Stream auf das gewünschte Directory
         { 
-            fos.getChannel().transferFrom(readByteChannel, 0, Long.MAX_VALUE);
+            fos.getChannel().transferFrom(readByteChannel, 0, Long.MAX_VALUE); // Datenübertragung des ausgewählten File (Upload)
         }	
 		}
 	}
