@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 /** @author SE1 Projektgruppe 7
- * @param 
- * @version 1.0
+ *  @version 1.0
  * 
  * 
  * 
@@ -16,19 +15,20 @@ public class LogFile {
 	
 
 	public static void main(String[]args) {
-		/*@param args Kommandozeilenoperator
+		/* @param args Kommandozeilenoperator
 		 *  */
 		LogFile testLogFile = new LogFile();
 		//testLogFile.creatLogFile("/Users/fabiandittrich/Desktop");
 		testLogFile.editLogFile("Fabian", "File", "kopiert", "/Users/fabiandittrich/Desktop/");
 		
 	}
-	
+	/** 	@param nDirPath Variable um den Pfad des neu erstellten Directorys zu übergeben an dem das Logfile erstellt werden soll
+	* 	@return void
+	*	Die Funktion wird immer dann aufgerufen wenn ein neues Verzeichnis erstellt wird und 
+	*	sie sorgt dafür das in diesem neuen Verzeichnis auch dementsprechend eine Logdatei angelegt wird
+	*/
 	public void creatLogFile(String nDirPath) 
 	{	
-	/* @param Sting der den Pfad repr�sentiert des neuen Verzeichnisses an dem ein LogFile generiert werden soll
-	 * @return void
-	*/
 		File nLog = new File(nDirPath,"LogFile.csv");
 		try 
 		{
@@ -43,10 +43,15 @@ public class LogFile {
 			e.printStackTrace();
 		}	
 	}
-
+/**
+* @param curDirectory	Dieser Parameter repäsentiert den Pfad des Verzeichnisses, in dessen Log-Datei protokolliert werden soll
+* @param curOperation	Dieser String Parameter repräsentiert die ausgeführte Operation
+* @param curFioDir	Dieser Parameter repräsentiert die Datei oder das Verzeichnis auf dem die Operation ausgeführt wird
+* @param curUser	Dieser Parameter steht für den User der die Operation ausführt
+*/
 	public void editLogFile(String curUser, String curFioDir, String curOperation, String curDirectory) 
-	/*Ale curUser sollte die eingelogte Email �bergeben werden; Als curFioDir sollte der Pfad �bergeben werden zur Datei oder
-	 * dem Verzeichnis mit dem operiert wurde; Als curOperation die durchgef�hrte Operation; 
+	/*Ale curUser sollte die eingelogte Email übergeben werden; Als curFioDir sollte der Pfad übergeben werden zur Datei oder
+	 * dem Verzeichnis mit dem operiert wurde; Als curOperation die durchgeführte Operation; 
 	 * Als curDirectory der Pfad des Verzeichnisses in dem das LogFile aktualisiert werden soll*/
 	{
 		String logFile = (curDirectory+"/LogFile.csv");
