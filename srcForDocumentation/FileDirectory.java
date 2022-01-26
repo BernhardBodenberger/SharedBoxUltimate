@@ -120,12 +120,12 @@ public class FileDirectory extends File {
 		}
 	}
 	
-	
-	/**	
-	* Dieser Funktion dient dem Download einer Datei aus SharedBoxUltimate in eines unserer 
-	* lokalen Verzeichnisser herunterzuladen
-	* @param source repräsentiert den Pfad der Datei die heruntergeladen werden soll 
-	*/
+
+/**	
+* Dieser Funktion dient dem Download einer Datei aus SharedBoxUltimate in eines unserer 
+* lokalen Verzeichnisser herunterzuladen
+* @param source repräsentiert den Pfad der Datei die heruntergeladen werden soll 
+*/
 	public void download(String source) throws IOException 
 	{		
 		File sourceFile = new File(source);			// Aus dem Pfad der Datei als String generieren wir ein File
