@@ -8,10 +8,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.JFileChooser;
-
+/**
+* @author SE 1 Projektgruppe 7
+* @version 1.0
+*/
 
 public class DownloadFinal {
-
+/**
+*
+*
+*/
 	
 	public static void main(String[] args) throws IOException 
 	{
@@ -23,9 +29,13 @@ public class DownloadFinal {
 		//upload1.uploadDir("/Users/fabiandittrich/Desktop/Server/");// Hier wieder auf das Slash achten
 		upload1.downloadDir("/Users/fabiandittrich/Desktop/Testdirectory");
 	}
-		
-	
-	
+
+/**
+* @param source Repäsentiert die Quelle als den Pfad zur Datei die heruntergeladen werden sol
+* @return void Alle Aktionen werden innerhalb der Methode ausgeführt und es werden keine Werte zurückgegeben
+* Die Funktion dient dazu Datei aus SharedBoxUltimate in ein lokales Verzeichnis zu speichern 
+* und dabei muss ein Name + der Datei-Suffix angegeben werden
+*/		
 	public void downloadFile(String source) throws IOException 
 	{		
 			File sourceFile = new File(source);
@@ -44,8 +54,10 @@ public class DownloadFinal {
 	        }
 			}
 	}
-	
-	
+/**
+*
+*
+*/	
 	public void uploadFile(String destinationString) throws IOException 
 	{  
 		JFileChooser fileChooser = new JFileChooser();
@@ -61,7 +73,11 @@ public class DownloadFinal {
         }	
 		}
 	}
-	
+/**
+* @param destinationStringDirectoryString Der Parameter übergibt den Pfad des Zielverzeichnisses in das das später ausgewählte Verzeichnis geuploadet werden soll
+* @return void Kein Rückgabewert
+* Die Funktion dienst dazu Vezeichnisse aus dem lokalen Speicher des Computers in ein Verzeichnis in SharedBoxUltimate upzuloaden
+*/	
 	@SuppressWarnings("static-access")
 	public void uploadDir(String destinationStringDirectoryString) throws IOException{
 		JFileChooser updirChooser = new JFileChooser();
@@ -85,6 +101,12 @@ public class DownloadFinal {
 			});
 		}
 	}
+	
+/**
+* @param sourceDirectoryString Der Parameter übergibt den Pfad des Verzeichnisses,das aus dem SharedBoxUltimate auf den lokalen Speicher in ein Verzeichnis gedownloadet werden soll
+* @return void Kein Rückgabewert
+* Die Funktion dient dazu Vezeichnisse aus SharedBoxUltimate in ein lokales Verzeichnis zu downloaden
+*/	
 	@SuppressWarnings("static-access")
 	public void downloadDir(String sourceDirectoryString) throws IOException{
 		
