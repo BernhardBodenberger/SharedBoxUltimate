@@ -121,10 +121,11 @@ public class FileDirectory extends File {
 	}
 	
 	
-	/**	Dieser Funktion dient dem Download einer Datei aus SharedBoxUltimate in eines unserer 
-		lokalen Verzeichnisser herunterzuladen
-		@param source repräsentiert den Pfad der Datei die heruntergeladen werden soll 
-		*/
+	/**	
+	* Dieser Funktion dient dem Download einer Datei aus SharedBoxUltimate in eines unserer 
+	* lokalen Verzeichnisser herunterzuladen
+	* @param source repräsentiert den Pfad der Datei die heruntergeladen werden soll 
+	*/
 	public void download(String source) throws IOException 
 	{		
 		File sourceFile = new File(source);			// Aus dem Pfad der Datei als String generieren wir ein File
@@ -149,10 +150,10 @@ public class FileDirectory extends File {
 			}
 		}
 	}
-	/**
-	Diese Funktion dient zum Upload einer lokalen Datei in das Verzeichnis was man zum Upload ausgewählt hat
-	@param destinationString Repräsentiert den Pfad in das Directory in das die Datei geuploadet werden soll
-	*/
+/**
+* Diese Funktion dient zum Upload einer lokalen Datei in das Verzeichnis was man zum Upload ausgewählt hat
+* @param destinationString Repräsentiert den Pfad in das Directory in das die Datei geuploadet werden soll
+*/
 	public void upload(String destinationString) throws IOException 
 	{  
 		JFileChooser fileChooser = new JFileChooser();		// Neues Objekt fileChooser der Klasser JFileChooser
