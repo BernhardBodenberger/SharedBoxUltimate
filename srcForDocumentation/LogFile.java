@@ -12,14 +12,12 @@ import java.util.Date;
 public class LogFile {
 	
 
-	public static void main(String[]args) {
-		/* @param args Kommandozeilenoperator
-		 *  */
+	/*public static void main(String[]args) {
 		LogFile testLogFile = new LogFile();
 		//testLogFile.creatLogFile("/Users/fabiandittrich/Desktop");
 		testLogFile.editLogFile("Fabian", "File", "kopiert", "/Users/fabiandittrich/Desktop/");
 		
-	}
+	}*/
 /** 	
 * @param nDirPath Variable um den Pfad des neu erstellten Directorys zu übergeben an dem das Logfile erstellt werden soll
 * @return void
@@ -47,17 +45,16 @@ public class LogFile {
 * @param curOperation	Dieser String Parameter repräsentiert die ausgeführte Operation
 * @param curFioDir	Dieser Parameter repräsentiert die Datei oder das Verzeichnis auf dem die Operation ausgeführt wird
 * @param curUser	Dieser Parameter steht für den User der die Operation ausführt
+* @return void 		Die Methoden haben keinen Rückgabewert. Alle Aktionen werden innerhalb der Methode ausgeführt
+* Die Methode editLogFile dient dazu jede Operation die von einem Anwender ausgführt wird mit folgenden Daten in der Log Datei zu dokumentieren
+* In der Log-Datei wird dokumentiert Welcher User,auf welcher Datei oder Verzeichnis, welche Methode, zu welcher Zeit angewendet hat.
 */
-/* Ale curUser sollte die eingelogte Email übergeben werden; Als curFioDir sollte der Pfad übergeben werden zur Datei oder
- * dem Verzeichnis mit dem operiert wurde; Als curOperation die durchgeführte Operation; 
- * Als curDirectory der Pfad des Verzeichnisses in dem das LogFile aktualisiert werden soll */	
+	
 	
 	public void editLogFile(String curUser, String curFioDir, String curOperation, String curDirectory) 
 	
 	{
 		String logFile = (curDirectory+"/LogFile.csv");
-		
-	
 		try 
 		{
 			FileWriter logWriter = new FileWriter(logFile, true);
